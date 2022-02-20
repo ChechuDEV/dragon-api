@@ -43,8 +43,8 @@ public abstract class CommandManager {
      * @return Whether a command has been found further from topCommand or not.
      */
     public boolean call(@NotNull Sender sender, @NotNull String[] args, @Nullable Command topCommand) {
-        for (Command command : topCommand == null ? getCommandList() : topCommand.getSubcommands()) {
-            if (command.getCommand().equals(args[0])) {
+        for (Command command : topCommand == null ? getCommandList() : topCommand.getDescription().getSubcommands()) {
+            if (command.getDescription().getCommand().equals(args[0])) {
                 if(!call(sender, nextArgs(args),command)) {
                     command.execute(sender, args);
                 }
@@ -62,9 +62,4 @@ public abstract class CommandManager {
     private @NotNull String[] nextArgs(@NotNull String[] args) {
         return Arrays.copyOfRange(args, 1, args.length);
     }
-
-    public String getHelp(Command command) {
-        return command.description;
-    }
-
 }
