@@ -1,7 +1,6 @@
 package dev.chechu.core.commands;
 
 import dev.chechu.core.Configuration;
-import dev.chechu.core.utils.Sender;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
