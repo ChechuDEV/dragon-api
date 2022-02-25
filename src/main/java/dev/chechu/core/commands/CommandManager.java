@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @RequiredArgsConstructor
-public abstract class CommandManager {
+public class CommandManager {
     @Getter private final List<Command> commandList = new ArrayList<>();
     @Getter @NonNull final private Configuration config;
 
@@ -31,7 +31,7 @@ public abstract class CommandManager {
      * @param args Arguments array given by the sender.
      * @param defaultCommand Default command.
      */
-    public void execute(@NotNull Sender sender, @NotNull String[] args, Command defaultCommand) {
+    public void execute(@NotNull Sender<?> sender, @NotNull String[] args, Command defaultCommand) {
         if(!call(sender, args, null)) defaultCommand.execute(sender, args);
     }
 
@@ -42,11 +42,12 @@ public abstract class CommandManager {
      * @param topCommand Last command found.
      * @return Whether a command has been found further from topCommand or not.
      */
-    public boolean call(@NotNull Sender sender, @NotNull String[] args, @Nullable Command topCommand) {
+    public boolean call(@NotNull Sender<?> sender, @NotNull String[] args, @Nullable Command topCommand) {
         for (Command command : topCommand == null ? getCommandList() : topCommand.getDescription().getSubcommands()) {
+            if (args.length == 0) return false;
             if (command.getDescription().getCommand().equals(args[0])) {
                 if(!call(sender, nextArgs(args),command)) {
-                    command.execute(sender, args);
+                    command.execute(sender, nextArgs(args));
                 }
                 return true;
             }
