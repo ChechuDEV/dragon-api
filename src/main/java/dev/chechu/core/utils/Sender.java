@@ -1,14 +1,16 @@
 package dev.chechu.core.utils;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class Sender {
+@AllArgsConstructor
+public abstract class Sender <T> {
     @Getter private boolean consoleSender;
     @Getter private boolean commandBlockSender;
     @Getter private boolean playerSender;
-    @Getter private Object sender;
+    @Getter private T sender;
 
     /**
      * Sends message to the Sender
