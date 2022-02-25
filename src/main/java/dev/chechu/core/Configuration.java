@@ -1,6 +1,9 @@
 package dev.chechu.core;
 
+import dev.chechu.core.utils.ConfigChunk;
+
 import java.io.File;
+import java.util.List;
 
 public interface Configuration {
 
@@ -23,7 +26,16 @@ public interface Configuration {
     /**
      * Fixes configuration versions.
      */
-    void fixVersions();
+    boolean fixVersions();
+
+    /**
+     * Sets the object to it value or default value.
+     * @param chunk Chunk from which to extract the object, key and default value.
+     * @param <T> Type of chunk.
+     */
+    <T> void setObjectFromChunk(ConfigChunk<T> chunk);
+
+    <T> boolean doesChunkExist(ConfigChunk<T> chunk);
 
     /**
      * Checks if a file exists
@@ -33,5 +45,4 @@ public interface Configuration {
     default boolean checkFile(File file) {
         return file.exists();
     }
-
 }
