@@ -9,6 +9,6 @@ public interface Command {
      * @param sender Sender of the command
      * @param args Arguments of the command
      */
-    void execute(Sender sender, String[] args);
+    void execute(Sender<?> sender, String[] args);
     Description getDescription();
 }
