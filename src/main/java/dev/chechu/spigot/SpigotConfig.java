@@ -15,9 +15,9 @@ public abstract class SpigotConfig implements Configuration {
     @Getter private final Logger logger;
     private FileConfiguration config;
 
-    private List<ConfigChunk> configChunks = new ArrayList<>();
+    private final List<ConfigChunk<?>> configChunks = new ArrayList<>();
 
-    private String currentVersion = "0.1";
+    private final String currentVersion = "0.1";
     private String fileVersion = "0.1";
 
     public SpigotConfig(JavaPlugin plugin) {
@@ -29,18 +29,10 @@ public abstract class SpigotConfig implements Configuration {
     }
 
     @Override
-    public void initializeConfig() {
-
-    }
-
-    @Override
-    public void reloadConfig() {
-
-    }
-
-    @Override
     public void createFiles() {
-        if (!plugin.getDataFolder().exists()) plugin.getDataFolder().mkdir();
+        if (!plugin.getDataFolder().exists()) if(!plugin.getDataFolder().mkdir()) {
+            logger.severe("The plugin's folder couldn't have been created. Perhaps some permissions are missing?");
+        }
         plugin.saveDefaultConfig();
     }
 
@@ -54,9 +46,11 @@ public abstract class SpigotConfig implements Configuration {
         }
         boolean fixed = false;
         for (ConfigChunk<?> configChunk : configChunks) {
-            if(!doesChunkExist(configChunk)) {
-                config.set(configChunk.getKey(),configChunk.getDefaultValue());
-                fixed = true;
+            if(configChunk.isFixable()) {
+                if(!doesChunkExist(configChunk)) {
+                    config.set(configChunk.getKey(),configChunk.getDefaultValue());
+                    fixed = true;
+                }
             }
             setObjectFromChunk(configChunk);
         }
@@ -66,12 +60,12 @@ public abstract class SpigotConfig implements Configuration {
 
     @Override
     public <T> void setObjectFromChunk(ConfigChunk<T> chunk) {
-        chunk.setObject(config.getObject(chunk.getKey(), chunk.getType(), chunk.getDefaultValue()));
+        chunk.setValue(config.getObject(chunk.getKey(), chunk.getType(), chunk.getDefaultValue()));
     }
 
     @Override
     public <T> boolean doesChunkExist(ConfigChunk<T> chunk) {
-        chunk.setObject(config.getObject(chunk.getKey(), chunk.getType(),null));
-        return chunk.getObject() != null;
+        chunk.setValue(config.getObject(chunk.getKey(), chunk.getType(),null));
+        return chunk.getValue() != null;
     }
 }
