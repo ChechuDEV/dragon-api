@@ -1,6 +1,7 @@
 package dev.chechu.core.commands;
 
 import dev.chechu.core.Configuration;
+import dev.chechu.core.utils.Sender;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +14,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 public abstract class CommandManager {
-    @Getter private List<Command> commandList = new ArrayList<>();
+    @Getter private final List<Command> commandList = new ArrayList<>();
     @Getter @NonNull final private Configuration config;
 
     /**
