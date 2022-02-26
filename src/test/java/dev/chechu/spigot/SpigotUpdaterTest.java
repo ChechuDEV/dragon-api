@@ -25,21 +25,21 @@ public class SpigotUpdaterTest {
     @Test
     public void assertThatNoNewVersionsExist() {
         plugin = MockBukkit.loadWith(MockPlugin.class,new PluginDescriptionFile("MockPlugin","2.1.1","dev.chechu.spigot.MockPlugin"));
-        Updater updater = new SpigotUpdater(plugin, "63607");
+        Updater updater = new SpigotUpdater(plugin, "63607",false);
         assertFalse(updater.checkForNewVersion());
     }
 
     @Test
     public void assertThatNewVersionExist() {
         plugin = MockBukkit.loadWith(MockPlugin.class,new PluginDescriptionFile("MockPlugin","2.1.0","dev.chechu.spigot.MockPlugin"));
-        Updater updater = new SpigotUpdater(plugin, "63607");
+        Updater updater = new SpigotUpdater(plugin, "63607",false);
         assertTrue(updater.checkForNewVersion());
     }
 
     @Test
     public void assertThatNewerVersionsArentDetected() {
         plugin = MockBukkit.loadWith(MockPlugin.class,new PluginDescriptionFile("MockPlugin","2.1.2","dev.chechu.spigot.MockPlugin"));
-        Updater updater = new SpigotUpdater(plugin, "63607");
+        Updater updater = new SpigotUpdater(plugin, "63607",false);
         assertFalse(updater.checkForNewVersion());
     }
 
