@@ -1,6 +1,7 @@
 package dev.chechu.spigot;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
+import dev.chechu.core.Core;
 import dev.chechu.core.Updater;
 import org.bukkit.Server;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -20,6 +21,7 @@ public class SpigotUpdaterTest {
     @BeforeAll
     public static void setUp() {
         server = MockBukkit.mock();
+        new Core(true);
     }
 
     @Test
