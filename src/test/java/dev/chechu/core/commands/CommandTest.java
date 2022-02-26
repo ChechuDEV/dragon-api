@@ -1,12 +1,8 @@
-package dev.chechu.commands;
+package dev.chechu.core.commands;
 
 import dev.chechu.core.Configuration;
-import dev.chechu.core.commands.Command;
-import dev.chechu.core.commands.CommandManager;
 import dev.chechu.core.utils.Description;
 import dev.chechu.core.utils.Sender;
-import dev.chechu.spigot.utils.SpigotSender;
-import org.bukkit.command.CommandSender;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -28,7 +24,7 @@ public class CommandTest {
     public static void prepare() {
         config = Mockito.mock(Configuration.class);
         manager = new CommandManager(config);
-        sender = SpigotSender.from(Mockito.mock(CommandSender.class));
+        sender = Mockito.mock(Sender.class);
 
         defCommand = new Command() {
             @Override

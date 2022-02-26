@@ -1,4 +1,4 @@
-package dev.chechu;
+package dev.chechu.core;
 
 import dev.chechu.core.utils.ConfigChunk;
 import org.apache.commons.lang.RandomStringUtils;
@@ -17,13 +17,17 @@ public class MemoryTest {
     private static int listWins = 0;
     private static int hashMapWins = 0;
 
+    private static final List<String> randomList = new ArrayList<>();
+
+    private static final int size = 2000;
+
     public void chunkTest() {
         long memory0 = Runtime.getRuntime().freeMemory();
         List<ConfigChunk<String>> configChunkList = new ArrayList<>();
-        for (int i = 0; i < 2000; i++) {
-            ConfigChunk<String> configChunk = new ConfigChunk<>("key"+i,getRandomString());
+        for (int i = 0; i < size; i++) {
+            ConfigChunk<String> configChunk = new ConfigChunk<>("key"+i,randomList.get(i));
             configChunkList.add(configChunk);
-            configChunk.setValue(getRandomString());
+            configChunk.setValue(randomList.get(i+size));
         }
         long memory1 = Runtime.getRuntime().freeMemory();
         chunkMemory = (memory0 - memory1);
@@ -34,10 +38,10 @@ public class MemoryTest {
         List<String> keys = new ArrayList<>();
         List<String> defaultValues = new ArrayList<>();
         List<String> values = new ArrayList<>();
-        for (int i = 0; i < 2000; i++) {
+        for (int i = 0; i < size; i++) {
             keys.add("key"+i);
-            defaultValues.add(getRandomString());
-            values.add(getRandomString());
+            defaultValues.add(randomList.get(i));
+            values.add(randomList.get(i+size));
         }
         long memory1 = Runtime.getRuntime().freeMemory();
         listMemory = (memory0 - memory1);
@@ -46,8 +50,8 @@ public class MemoryTest {
     public void hashMapTest() {
         long memory0 = Runtime.getRuntime().freeMemory();
         HashMap<String, Map.Entry<String, String>> configHashMap = new HashMap<>();
-        for (int i = 0; i < 2000; i++) {
-            Map.Entry<String, String> defaultValueValue = new AbstractMap.SimpleEntry<>(getRandomString(), getRandomString());
+        for (int i = 0; i < size; i++) {
+            Map.Entry<String, String> defaultValueValue = new AbstractMap.SimpleEntry<>(randomList.get(i), randomList.get(i+size));
             configHashMap.put("key"+i,defaultValueValue);
         }
         long memory1 = Runtime.getRuntime().freeMemory();
@@ -60,6 +64,9 @@ public class MemoryTest {
 
     @RepeatedTest(10)
     public void test() {
+        for (int i = 0; i < size*2; i++) {
+            randomList.add(getRandomString());
+        }
         int random;
         boolean first = false;
         boolean second = false;
