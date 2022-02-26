@@ -7,8 +7,6 @@ import dev.chechu.core.utils.Description;
 import dev.chechu.core.utils.Sender;
 import dev.chechu.spigot.utils.SpigotSender;
 import org.bukkit.command.CommandSender;
-import org.junit.Rule;
-import org.junit.contrib.java.lang.system.SystemOutRule;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -17,7 +15,6 @@ import org.mockito.Mockito;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.logging.Logger;
 
 import static org.junit.jupiter.api.Assertions.*;
 
