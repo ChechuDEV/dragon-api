@@ -57,8 +57,8 @@ public class SpigotUpdater extends Updater {
         String[] splittedVersion = version.split("[.]");
         if(splittedVersion.length < 3) return;
         setCurrentMajor(Integer.parseInt(splittedVersion[0]));
-        setCurrentMajor(Integer.parseInt(splittedVersion[1]));
-        setCurrentMajor(Integer.parseInt(splittedVersion[2]));
+        setCurrentMinor(Integer.parseInt(splittedVersion[1]));
+        setCurrentPatch(Integer.parseInt(splittedVersion[2]));
     }
 
     @Override
