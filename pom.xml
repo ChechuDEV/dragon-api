@@ -63,6 +63,21 @@
       <version>${powermock.version}</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>com.github.seeseemelk</groupId>
+      <artifactId>MockBukkit-v1.18</artifactId>
+      <version>1.15.5</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
 </project>
