@@ -19,7 +19,7 @@ public class MemoryTest {
 
     private static final List<String> randomList = new ArrayList<>();
 
-    private static final int size = 2000;
+    private static final int size = 5000;
 
     public void chunkTest() {
         long memory0 = Runtime.getRuntime().freeMemory();
