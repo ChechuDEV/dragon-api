@@ -7,6 +7,8 @@ import dev.chechu.core.utils.Description;
 import dev.chechu.core.utils.Sender;
 import dev.chechu.spigot.utils.SpigotSender;
 import org.bukkit.command.CommandSender;
+import org.junit.Rule;
+import org.junit.contrib.java.lang.system.SystemOutRule;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -15,23 +17,26 @@ import org.mockito.Mockito;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Logger;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CommandTest {
     static CommandManager manager;
     static Sender<?> sender;
     static Command defCommand;
+    static String out = "";
+    static Configuration config;
     @BeforeAll
     public static void prepare() {
-        manager = new CommandManager(Mockito.mock(Configuration.class));
+        config = Mockito.mock(Configuration.class);
+        manager = new CommandManager(config);
         sender = SpigotSender.from(Mockito.mock(CommandSender.class));
 
         defCommand = new Command() {
             @Override
             public void execute(Sender<?> sender, String[] args) {
-                System.out.println("Default command executed.");
+                out = "Default command executed.";
             }
 
             @Override
@@ -102,6 +107,23 @@ public class CommandTest {
         assertFalse(manager.call(sender, List.of("those").toArray(String[]::new),null));
     }
 
+    @Test
+    public void assertThatDefaultExecutesWhenNonExistent() {
+        out = "";
+        manager.execute(sender, List.of("those").toArray(String[]::new),defCommand);
+        assertEquals("Default command executed.",out, "Default should've executed.");
+    }
 
+    @Test
+    public void assertThatDefaultDoesntExecuteWhenExistent() {
+        out = "";
+        manager.execute(sender, List.of("this").toArray(String[]::new),defCommand);
+        assertNotEquals("Default command executed.",out,"Default shouldn't have been executed.");
+    }
+
+    @Test
+    public void assertThatGetConfigWorks() {
+        assertEquals(config,manager.getConfig(),"Config should be given.");
+    }
 
 }
