@@ -1,0 +1,13 @@
+update_search: "Searching for updates..."
+update_not_available: "There are no updates available."
+update_available_no_auto: "There is an update available, however, auto-updates are disabled."
+update_available_auto: "There is an update available, trying to update..."
+update_success: "The plugin has been automagically updated!"
+update_fail: "The plugin has failed to update, restarting the plugin..."
+update_version_fail: "An error has occurred while checking the plugin's version."
+update_major_difference: "This plugin is too outdated, the plugin will NOT try to update itself, please, do it manually."
+
+config_folder_creation_error: "Couldn't create the plugin's folder, perhaps there are missing permissions?"
+config_file_creation_error: "Couldn't create the config.yml file, perhaps there are missing permissions?"
+config_version_error: "Couldn't infer the config.yml version, perhaps the config file is too old or corrupted. The plugin will try to work, however, default values may be used if no values are found."
+config_fix: "Configuration fixed for you automagically!"
