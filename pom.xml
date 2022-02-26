@@ -10,7 +10,7 @@
   <properties>
     <maven.compiler.source>16</maven.compiler.source>
     <maven.compiler.target>16</maven.compiler.target>
-    <powermock.version>2.0.2</powermock.version>
+    <powermock.version>2.0.9</powermock.version>
   </properties>
 
   <repositories>
@@ -24,7 +24,7 @@
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <version>RELEASE</version>
+      <version>1.18.22</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -36,7 +36,7 @@
     <dependency>
       <groupId>org.jetbrains</groupId>
       <artifactId>annotations</artifactId>
-      <version>RELEASE</version>
+      <version>22.0.0</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -48,7 +48,7 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
-      <version>RELEASE</version>
+      <version>5.8.2</version>
       <scope>test</scope>
     </dependency>
     <dependency>
