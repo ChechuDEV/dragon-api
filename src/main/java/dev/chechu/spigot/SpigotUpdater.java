@@ -5,22 +5,22 @@ import com.google.gson.JsonParser;
 import dev.chechu.core.Core;
 import dev.chechu.core.Updater;
 import dev.chechu.core.utils.Message;
+import org.apache.commons.io.FileUtils;
 import org.bukkit.plugin.InvalidPluginException;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginLoader;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.channels.Channels;
-import java.nio.channels.FileChannel;
-import java.nio.channels.ReadableByteChannel;
+import java.util.Random;
 import java.util.logging.Logger;
-import org.apache.commons.io.FilenameUtils;
 
 public class SpigotUpdater extends Updater {
     private final String USER_AGENT  = "DragonAPI";// Change this!
@@ -40,11 +40,11 @@ public class SpigotUpdater extends Updater {
     }
 
     @Override
-    public void tryUpdate() {
+    public void tryUpdate(boolean delete) {
         if(checkForNewVersion()) {
             if (this.isAutoUpdateEnabled()) {
                 logger.info(Message.get("update_available_auto"));
-                if(downloadNewVersion()) logger.info(Message.get("update_success"));
+                if(downloadNewVersion(delete)) logger.info(Message.get("update_success"));
                 else logger.info(Message.get("update_fail"));
             } else {
                 logger.warning(Message.get("update_available_no_auto"));
@@ -85,7 +85,7 @@ public class SpigotUpdater extends Updater {
             InputStreamReader reader = new InputStreamReader(inputStream);
 
             // This could be either a JsonArray or JsonObject
-            JsonElement element = new JsonParser().parse(reader);
+            JsonElement element = JsonParser.parseReader(reader);
             if (element.isJsonObject()) {
                 return element.getAsJsonObject().get("name").getAsString();
             }
@@ -108,33 +108,46 @@ public class SpigotUpdater extends Updater {
     }
 
     @Override
-    public boolean downloadNewVersion() {
+    public boolean downloadNewVersion(boolean delete) {
         File oldPlugin;
+        File backup;
         File newPlugin;
+        File oldFolder = new File(PLUGIN_FOLDER,"temp"+ (new Random().nextInt(255)));
+        if(!oldFolder.exists())oldFolder.mkdir();
         PluginLoader loader = plugin.getPluginLoader();
         loader.disablePlugin(plugin);
         try {
-            newPlugin = new File(PLUGIN_FOLDER, FilenameUtils.getName((new URL(DOWNLOAD_URL)).getPath()));
             Method getFileMethod = JavaPlugin.class.getDeclaredMethod("getFile");
             getFileMethod.setAccessible(true);
             oldPlugin = (File) getFileMethod.invoke(plugin);
-        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | MalformedURLException e) {
+            FileUtils.copyToDirectory(oldPlugin,oldFolder);
+            backup = new File(oldFolder,oldPlugin.getName());
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | IOException e) {
             if (Core.debugMode)
                 e.printStackTrace();
             return false;
         }
-
-        if(!downloadFile(DOWNLOAD_URL,newPlugin,oldPlugin)) return false;
+        newPlugin = downloadFile(DOWNLOAD_URL,PLUGIN_FOLDER,oldPlugin,delete);
+        if(newPlugin == null) return false;
 
         try {
             Plugin thePlugin = loader.loadPlugin(newPlugin);
+            String version = thePlugin.getDescription().getVersion();
+            String name = thePlugin.getName();
+            if(!newPlugin.renameTo(new File(newPlugin.getParentFile(),name+"-"+version+".jar"))) {
+                if(Core.debugMode)
+                    logger.severe(Message.get("update-filename-error"));
+                if(!newPlugin.delete()) return false;
+                FileUtils.copyFileToDirectory(backup,PLUGIN_FOLDER);
+                return false;
+            }
             loader.enablePlugin(thePlugin);
-        } catch (InvalidPluginException e) {
+            FileUtils.deleteDirectory(oldFolder);
+        } catch (InvalidPluginException | IOException e) {
             if(Core.debugMode)
                 e.printStackTrace();
+            return false;
         }
-
-
         return true;
     }
 }
