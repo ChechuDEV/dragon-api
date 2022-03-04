@@ -6,6 +6,7 @@ update_success: "The plugin has been automagically updated!"
 update_fail: "The plugin has failed to update, restarting the plugin..."
 update_version_fail: "An error has occurred while checking the plugin's version."
 update_major_difference: "This plugin is too outdated, the plugin will NOT try to update itself, please, do it manually."
+update_filename_error: "Failed to change plugin's filename... Deleting the downloaded plugin."
 
 config_folder_creation_error: "Couldn't create the plugin's folder, perhaps there are missing permissions?"
 config_file_creation_error: "Couldn't create the config.yml file, perhaps there are missing permissions?"
