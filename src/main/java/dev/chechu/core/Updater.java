@@ -1,13 +1,13 @@
 package dev.chechu.core;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
 import java.util.logging.Logger;
 
 public abstract class Updater {
@@ -24,7 +24,7 @@ public abstract class Updater {
 
     @Getter(AccessLevel.PROTECTED) @Setter(AccessLevel.PROTECTED) private Logger logger;
 
-    public abstract void tryUpdate();
+    public abstract void tryUpdate(boolean delete);
 
     public abstract void setCurrentVersion(String version);
     public abstract String getLatestVersion();
@@ -32,25 +32,28 @@ public abstract class Updater {
 
     public abstract boolean checkForNewVersion();
 
-    public abstract boolean downloadNewVersion();
+    public abstract boolean downloadNewVersion(boolean delete);
 
-    public boolean downloadFile(String urlString, File file, File oldFile) {
+    public File downloadFile(String urlString, File folder, File oldFile, boolean delete) {
         try {
-            URL url = new URL(urlString);
-            ReadableByteChannel readableByteChannel = Channels.newChannel(url.openStream());
-            FileOutputStream fileOutputStream = new FileOutputStream(file);
-            fileOutputStream.getChannel().transferFrom(readableByteChannel,0,Long.MAX_VALUE);
+            String filename = "temp.jar";
+
+            File output = new File(folder, filename);
+            FileUtils.copyURLToFile(new URL(urlString), output);
+            /*if (!delete && oldFile != null) {
+                if (!oldFile.renameTo(new File(oldFile.getParentFile(),oldFile.getName()+".old"))) {
+                    output.delete();
+                    return null;
+                }
+            } else */
+            if (delete) {
+                oldFile.delete();
+            }
+            return output;
         } catch (IOException e) {
             if (Core.debugMode)
                 e.printStackTrace();
-            return false;
+            return null;
         }
-        if (oldFile != null) {
-            if (!oldFile.renameTo(new File(oldFile.getParentFile(),oldFile.getName()+".old"))) {
-                file.delete();
-                return false;
-            }
-        }
-        return true;
     }
 }
