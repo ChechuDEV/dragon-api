@@ -3,18 +3,21 @@ package dev.chechu.spigot;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import dev.chechu.core.Core;
 import dev.chechu.core.Updater;
+import lombok.SneakyThrows;
+import org.apache.commons.io.FileUtils;
 import org.bukkit.Server;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SpigotUpdaterTest {
     private static MockPlugin plugin;
-    private static PluginDescriptionFile pdf;
     private static Server server;
 
 
@@ -45,8 +48,19 @@ public class SpigotUpdaterTest {
         assertFalse(updater.checkForNewVersion());
     }
 
+    @Test
+    public void checkThatDownloads() {
+        plugin = MockBukkit.loadWith(MockPlugin.class, new PluginDescriptionFile("MockPlugin","1.0.0","dev.chechu.spigot.MockPlugin"));
+        Updater updater = new SpigotUpdater(plugin, "87154", true);
+        updater.tryUpdate(false);
+        File file = new File("out","CustomScoreboard-1.0.1.jar");
+        assertTrue(file.exists(),"File should exist");
+    }
+
+    @SneakyThrows
     @AfterAll
     public static void tearDown() {
+        FileUtils.cleanDirectory(new File("out"));
         MockBukkit.unmock();
     }
 }
