@@ -4,7 +4,7 @@
   <groupId>dev.chechu</groupId>
   <artifactId>dragon-api</artifactId>
   <packaging>jar</packaging>
-  <version>1.0</version>
+  <version>1.0.0</version>
   <name>dragon-api</name>
   <url>http://maven.apache.org</url>
   <properties>
@@ -91,4 +91,12 @@
       </plugins>
     </pluginManagement>
   </build>
+
+  <distributionManagement>
+    <repository>
+      <id>github</id>
+      <name>GitHub Chechuu Apache Maven Packages</name>
+      <url>https://maven.pkg.github.com/DarkDragon117/dragon-api</url>
+    </repository>
+  </distributionManagement>
 </project>
