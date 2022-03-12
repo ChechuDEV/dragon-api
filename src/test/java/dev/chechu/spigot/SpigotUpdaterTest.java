@@ -1,8 +1,9 @@
 package dev.chechu.spigot;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
-import dev.chechu.core.Core;
-import dev.chechu.core.Updater;
+import dev.chechu.dragonapi.core.Core;
+import dev.chechu.dragonapi.core.Updater;
+import dev.chechu.dragonapi.spigot.SpigotUpdater;
 import lombok.SneakyThrows;
 import org.apache.commons.io.FileUtils;
 import org.bukkit.Server;

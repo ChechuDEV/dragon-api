@@ -1,4 +1,4 @@
-package dev.chechu.core.utils;
+package dev.chechu.dragonapi.core.utils;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,13 +19,13 @@ public abstract class Sender <T> {
     public abstract void sendMessage(@NotNull String message);
 
     /**
-     * Sends actionBar to the Sender
+     * Sends actionBar to the Sender if the Sender is a player
      * @param actionBar Action bar to be displayed
      */
     public abstract void sendActionBar(@NotNull String actionBar);
 
     /**
-     * Sends a title to the Sender
+     * Sends a title to the Sender if the Sender is a player
      * @param title Title to be shown
      * @param subtitle Subtitle to be shown
      */

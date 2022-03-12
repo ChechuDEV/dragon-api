@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>dev.chechu</groupId>
-  <artifactId>dragon-api</artifactId>
+  <artifactId>dragonapi</artifactId>
   <packaging>jar</packaging>
   <version>1.0.0</version>
   <name>dragon-api</name>
@@ -94,8 +94,8 @@
 
   <distributionManagement>
     <repository>
-      <id>dragon-api</id>
-      <name>GitHub Chechuu Apache Maven Packages</name>
+      <id>github</id>
+      <name>GitHub Packages</name>
       <url>https://maven.pkg.github.com/DarkDragon117/dragon-api</url>
     </repository>
   </distributionManagement>

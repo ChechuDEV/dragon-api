@@ -1,6 +1,6 @@
-package dev.chechu.core;
+package dev.chechu.dragonapi.core;
 
-import dev.chechu.core.utils.Message;
+import dev.chechu.dragonapi.core.utils.Message;
 
 public class Core {
     public static boolean debugMode = false;

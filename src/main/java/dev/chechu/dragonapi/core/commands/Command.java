@@ -1,7 +1,7 @@
-package dev.chechu.core.commands;
+package dev.chechu.dragonapi.core.commands;
 
-import dev.chechu.core.utils.Description;
-import dev.chechu.core.utils.Sender;
+import dev.chechu.dragonapi.core.utils.Description;
+import dev.chechu.dragonapi.core.utils.Sender;
 
 public interface Command {
     /**

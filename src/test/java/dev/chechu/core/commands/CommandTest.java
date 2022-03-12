@@ -1,8 +1,10 @@
 package dev.chechu.core.commands;
 
-import dev.chechu.core.Configuration;
-import dev.chechu.core.utils.Description;
-import dev.chechu.core.utils.Sender;
+import dev.chechu.dragonapi.core.Configuration;
+import dev.chechu.dragonapi.core.commands.Command;
+import dev.chechu.dragonapi.core.commands.CommandManager;
+import dev.chechu.dragonapi.core.utils.Description;
+import dev.chechu.dragonapi.core.utils.Sender;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;

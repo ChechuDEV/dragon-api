@@ -1,10 +1,10 @@
-package dev.chechu.spigot;
+package dev.chechu.dragonapi.spigot;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import dev.chechu.core.Core;
-import dev.chechu.core.Updater;
-import dev.chechu.core.utils.Message;
+import dev.chechu.dragonapi.core.Core;
+import dev.chechu.dragonapi.core.Updater;
+import dev.chechu.dragonapi.core.utils.Message;
 import org.apache.commons.io.FileUtils;
 import org.bukkit.plugin.InvalidPluginException;
 import org.bukkit.plugin.Plugin;

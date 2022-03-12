@@ -1,4 +1,4 @@
-package dev.chechu.core;
+package dev.chechu.dragonapi.core;
 
 import lombok.AccessLevel;
 import lombok.Getter;

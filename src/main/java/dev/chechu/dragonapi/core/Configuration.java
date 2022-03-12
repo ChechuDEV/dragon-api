@@ -1,6 +1,6 @@
-package dev.chechu.core;
+package dev.chechu.dragonapi.core;
 
-import dev.chechu.core.utils.ConfigChunk;
+import dev.chechu.dragonapi.core.utils.ConfigChunk;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;

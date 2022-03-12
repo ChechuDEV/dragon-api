@@ -1,6 +1,4 @@
-package dev.chechu.core.commands;
-
-import org.jetbrains.annotations.Nullable;
+package dev.chechu.dragonapi.core.commands;
 
 public abstract class HelpManager {
     private final String mainCommand;
@@ -50,7 +48,7 @@ public abstract class HelpManager {
     }
 
     /**
-     * Gets all the help <br>TODO: Add a way to exclude, or only include, the specified command and its subcommands.
+     * Gets all the help
      * @return All commands help
      */
     public String getAllHelp() {

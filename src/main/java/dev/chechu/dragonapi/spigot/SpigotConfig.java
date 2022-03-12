@@ -1,8 +1,8 @@
-package dev.chechu.spigot;
+package dev.chechu.dragonapi.spigot;
 
-import dev.chechu.core.Configuration;
-import dev.chechu.core.utils.ConfigChunk;
-import dev.chechu.core.utils.Message;
+import dev.chechu.dragonapi.core.Configuration;
+import dev.chechu.dragonapi.core.utils.ConfigChunk;
+import dev.chechu.dragonapi.core.utils.Message;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;

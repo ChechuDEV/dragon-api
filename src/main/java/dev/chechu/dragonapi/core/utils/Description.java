@@ -1,6 +1,6 @@
-package dev.chechu.core.utils;
+package dev.chechu.dragonapi.core.utils;
 
-import dev.chechu.core.commands.Command;
+import dev.chechu.dragonapi.core.commands.Command;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

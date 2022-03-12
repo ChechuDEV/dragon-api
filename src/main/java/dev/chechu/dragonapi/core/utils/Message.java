@@ -1,4 +1,4 @@
-package dev.chechu.core.utils;
+package dev.chechu.dragonapi.core.utils;
 
 import org.yaml.snakeyaml.Yaml;
 

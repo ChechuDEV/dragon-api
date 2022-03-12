@@ -1,7 +1,7 @@
-package dev.chechu.core.commands;
+package dev.chechu.dragonapi.core.commands;
 
-import dev.chechu.core.Configuration;
-import dev.chechu.core.utils.Sender;
+import dev.chechu.dragonapi.core.Configuration;
+import dev.chechu.dragonapi.core.utils.Sender;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;

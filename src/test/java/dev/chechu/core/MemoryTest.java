@@ -1,6 +1,6 @@
 package dev.chechu.core;
 
-import dev.chechu.core.utils.ConfigChunk;
+import dev.chechu.dragonapi.core.utils.ConfigChunk;
 import org.apache.commons.lang.RandomStringUtils;
 import org.junit.jupiter.api.*;
 
