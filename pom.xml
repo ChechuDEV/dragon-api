@@ -6,7 +6,7 @@
   <packaging>jar</packaging>
   <version>1.0.0</version>
   <name>dragon-api</name>
-  <url>http://maven.apache.org</url>
+
   <properties>
     <maven.compiler.source>16</maven.compiler.source>
     <maven.compiler.target>16</maven.compiler.target>
