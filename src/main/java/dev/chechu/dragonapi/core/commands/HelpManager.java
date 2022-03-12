@@ -1,6 +1,6 @@
 package dev.chechu.dragonapi.core.commands;
 
-public abstract class HelpManager {
+public class HelpManager {
     private final String mainCommand;
     private final CommandManager commandManager;
 
