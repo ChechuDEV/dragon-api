@@ -52,4 +52,10 @@ public abstract class Configuration {
     public boolean checkFile(File file) {
         return file.exists();
     }
+
+    public void setConfigChunks() {
+        for (ConfigChunk<?> configChunk : configChunks) {
+            setObjectFromChunk(configChunk);
+        }
+    }
 }
