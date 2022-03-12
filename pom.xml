@@ -96,7 +96,7 @@
     <repository>
       <id>github</id>
       <name>GitHub Packages</name>
-      <url>https://maven.pkg.github.com/DarkDragon117/dragon-api</url>
+      <url>https://maven.pkg.github.com/darkdragon117/dragon-api</url>
     </repository>
   </distributionManagement>
 </project>
