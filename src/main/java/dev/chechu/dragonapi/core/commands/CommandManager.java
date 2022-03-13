@@ -12,10 +12,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Manages the plugins commands and its executions.
+ * @param <T> Configuration class, must extend dev.chechu.dragonapi.core.Configuration class or subclasses
+ */
 @RequiredArgsConstructor
-public class CommandManager {
+public class CommandManager<T extends Configuration<?>> {
     @Getter private final List<Command> commandList = new ArrayList<>();
-    @Getter @NonNull final private Configuration config;
+    @Getter @NonNull final private T config;
 
     /**
      * Adds command to the command list
