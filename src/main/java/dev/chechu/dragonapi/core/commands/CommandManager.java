@@ -3,8 +3,6 @@ package dev.chechu.dragonapi.core.commands;
 import dev.chechu.dragonapi.core.Configuration;
 import dev.chechu.dragonapi.core.utils.Sender;
 import lombok.Getter;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -16,10 +14,15 @@ import java.util.List;
  * Manages the plugins commands and its executions.
  * @param <T> Configuration class, must extend dev.chechu.dragonapi.core.Configuration class or subclasses
  */
-@RequiredArgsConstructor
 public class CommandManager<T extends Configuration<?>> {
     @Getter private final List<Command> commandList = new ArrayList<>();
-    @Getter @NonNull final private T config;
+    @Getter final private T config;
+    @Getter final private HelpManager helpManager;
+
+    public CommandManager(T config, String mainCommand) {
+        this.config = config;
+        this.helpManager = new HelpManager(mainCommand,this);
+    }
 
     /**
      * Adds command to the command list
@@ -36,7 +39,7 @@ public class CommandManager<T extends Configuration<?>> {
      * @param defaultCommand Default command.
      */
     public void execute(@NotNull Sender<?> sender, @NotNull String[] args, Command defaultCommand) {
-        if(!call(sender, args, null)) defaultCommand.execute(sender, args);
+        if(!call(sender, args, null)) defaultCommand.execute(sender, args, this);
     }
 
     /**
@@ -51,7 +54,7 @@ public class CommandManager<T extends Configuration<?>> {
             if (args.length == 0) return false;
             if (command.getDescription().getCommand().equals(args[0])) {
                 if(!call(sender, nextArgs(args),command)) {
-                    command.execute(sender, nextArgs(args));
+                    command.execute(sender, nextArgs(args),this);
                 }
                 return true;
             }
