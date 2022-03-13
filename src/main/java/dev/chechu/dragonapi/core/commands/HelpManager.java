@@ -2,9 +2,9 @@ package dev.chechu.dragonapi.core.commands;
 
 public class HelpManager {
     private final String mainCommand;
-    private final CommandManager commandManager;
+    private final CommandManager<?> commandManager;
 
-    public HelpManager(String mainCommand, CommandManager commandManager) {
+    public HelpManager(String mainCommand, CommandManager<?> commandManager) {
         this.mainCommand = "/" + mainCommand;
         this.commandManager = commandManager;
     }
