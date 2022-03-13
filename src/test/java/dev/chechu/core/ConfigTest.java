@@ -7,8 +7,4 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 
 public class ConfigTest {
-    @Test
-    public void assertThatFileDoesntExist() {
-
-    }
 }
