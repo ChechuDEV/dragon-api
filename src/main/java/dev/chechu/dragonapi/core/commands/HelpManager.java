@@ -9,11 +9,6 @@ public class HelpManager {
         this.commandManager = commandManager;
     }
 
-    public HelpManager(String mainCommand) {
-        this.mainCommand = mainCommand;
-        this.commandManager = null;
-    }
-
     /**
      * Gets help from the specified command, if specified it also maps the commands under it.
      * @param command Command from which to extract the help.

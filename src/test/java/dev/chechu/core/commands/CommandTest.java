@@ -17,7 +17,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CommandTest {
-    static CommandManager manager;
+    static CommandManager<Configuration<?>> manager;
     static Sender<?> sender;
     static Command defCommand;
     static String out = "";
@@ -25,12 +25,12 @@ public class CommandTest {
     @BeforeAll
     public static void prepare() {
         config = Mockito.mock(Configuration.class);
-        manager = new CommandManager(config);
+        manager = new CommandManager<Configuration<?>>(config, "command");
         sender = Mockito.mock(Sender.class);
 
         defCommand = new Command() {
             @Override
-            public void execute(Sender<?> sender, String[] args) {
+            public void execute(Sender<?> sender, String[] args, CommandManager<?> manager) {
                 out = "Default command executed.";
             }
 
@@ -44,7 +44,7 @@ public class CommandTest {
 
         Command command = new Command() {
             @Override
-            public void execute(Sender<?> sender, String[] args) {
+            public void execute(Sender<?> sender, String[] args, CommandManager<?> manager) {
                 if(args.length > 0 && args[0].equals("false")) {
                     System.out.println("False arg");
                     return;
@@ -68,7 +68,7 @@ public class CommandTest {
     public void addCommandTest() {
         Command testCommand = new Command() {
             @Override
-            public void execute(Sender<?> sender, String[] args) {
+            public void execute(Sender<?> sender, String[] args, CommandManager<?> manager) {
 
             }
 
