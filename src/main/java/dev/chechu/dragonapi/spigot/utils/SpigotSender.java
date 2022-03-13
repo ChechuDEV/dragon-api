@@ -39,6 +39,12 @@ public class SpigotSender extends Sender<CommandSender> {
         getSender().sendMessage(message);
     }
 
+
+    public void sendMessage(@NotNull TextComponent component) {
+        if(isPlayerSender())
+            ((Player)getSender()).spigot().sendMessage(component);
+    }
+
     /**
      * Displays an action bar if the Sender is a player
      * @param actionBar Action bar to be displayed
