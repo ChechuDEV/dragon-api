@@ -5,8 +5,13 @@ public class HelpManager {
     private final CommandManager<?> commandManager;
 
     public HelpManager(String mainCommand, CommandManager<?> commandManager) {
-        this.mainCommand = "/" + mainCommand;
+        this.mainCommand = mainCommand;
         this.commandManager = commandManager;
+    }
+
+    public HelpManager(String mainCommand) {
+        this.mainCommand = mainCommand;
+        this.commandManager = null;
     }
 
     /**
@@ -17,7 +22,7 @@ public class HelpManager {
      */
     public String getHelp(Command command, boolean mapUnder) {
         StringBuilder help = new StringBuilder();
-        help.append(mainCommand + " ")
+        help.append("/"+mainCommand + " ")
                 .append(command.getDescription().getCommand()).append(" ")
                 .append(getParams(command)).append("- ")
                 .append(command.getDescription());
@@ -52,6 +57,7 @@ public class HelpManager {
      * @return All commands help
      */
     public String getAllHelp() {
+        if (commandManager == null) return "ERROR";
         StringBuilder help = new StringBuilder();
         for (Command command : commandManager.getCommandList()) {
             help.append(getHelp(command, true)).append("\n");
