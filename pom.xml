@@ -4,7 +4,7 @@
   <groupId>dev.chechu</groupId>
   <artifactId>dragonapi</artifactId>
   <packaging>jar</packaging>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
   <name>dragon-api</name>
 
   <properties>
@@ -66,7 +66,7 @@
     <dependency>
       <groupId>com.github.seeseemelk</groupId>
       <artifactId>MockBukkit-v1.18</artifactId>
-      <version>1.15.5</version>
+      <version>1.18.1</version>
       <scope>test</scope>
     </dependency>
     <dependency>
