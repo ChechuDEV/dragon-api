@@ -30,4 +30,6 @@ public abstract class Sender <T> {
      * @param subtitle Subtitle to be shown
      */
     public abstract void sendTitle(@NotNull String title, @Nullable String subtitle);
+
+    public abstract String getLocale();
 }

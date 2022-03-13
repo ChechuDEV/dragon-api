@@ -65,4 +65,10 @@ public class SpigotSender extends Sender<CommandSender> {
         if(isPlayerSender())
             ((Player)getSender()).sendTitle(title,subtitle);
     }
+
+    @Override
+    public String getLocale() {
+        if(!isPlayerSender()) return "en_US";
+        return ((Player)getSender()).getLocale();
+    }
 }
