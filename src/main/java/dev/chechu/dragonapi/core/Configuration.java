@@ -14,13 +14,22 @@ public abstract class Configuration<T> {
     @Getter(AccessLevel.PROTECTED) private final List<ConfigChunk<?>> configChunks = new ArrayList<>();
     @Getter private final Logger logger;
     @Getter private final T plugin;
+
+    private static Configuration<?> instance;
     public Configuration(Logger logger, T plugin) {
+
         this.logger = logger;
         this.plugin = plugin;
         createFiles();
         initializeConfig();
         setConfigChunks();
         if(fixVersions()) getLogger().info(Message.get("config_fix"));
+    }
+
+    public static <T> Configuration<T> getInstance(Class<T> clazz) {
+        if(instance != null && instance.getClass().isInstance(clazz))
+            return (Configuration<T>) instance;
+        throw new RuntimeException("Instance class doesn't match the requested one");
     }
 
     /**

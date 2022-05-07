@@ -21,11 +21,11 @@ public class CommandTest {
     static Sender<?> sender;
     static Command defCommand;
     static String out = "";
-    static Configuration config;
+    static Configuration<?> config;
     @BeforeAll
     public static void prepare() {
         config = Mockito.mock(Configuration.class);
-        manager = new CommandManager<Configuration<?>>(config, "command");
+        manager = new CommandManager<>(config, "command");
         sender = Mockito.mock(Sender.class);
 
         defCommand = new Command() {
