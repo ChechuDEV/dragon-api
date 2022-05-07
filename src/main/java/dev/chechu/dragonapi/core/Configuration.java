@@ -26,9 +26,9 @@ public abstract class Configuration<T> {
         if(fixVersions()) getLogger().info(Message.get("config_fix"));
     }
 
-    public static <T> Configuration<T> getInstance(Class<T> clazz) {
+    public static <T> T getInstance(Class<T> clazz) {
         if(instance != null && instance.getClass().isInstance(clazz))
-            return (Configuration<T>) instance;
+            return (T) instance;
         throw new RuntimeException("Instance class doesn't match the requested one");
     }
 
