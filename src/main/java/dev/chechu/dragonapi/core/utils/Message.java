@@ -1,13 +1,13 @@
 package dev.chechu.dragonapi.core.utils;
 
-import org.yaml.snakeyaml.Yaml;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.yaml.snakeyaml.Yaml;
 
 public class Message {
     private static final HashMap<String, Map<String, Object>> apiLangs = new HashMap<>();
@@ -30,14 +30,14 @@ public class Message {
         try {
             InputStream in = new FileInputStream(file);
             Map<String, Object> data = yaml.load(in);
-            lang.put(file.getName().replace(".yml",""),data);
+            lang.put(file.getName().replace(".yml", ""), data);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     private File[] getFiles(ClassLoader loader) {
-        URL url = loader.getResource("langs");
+        URL url = loader.getResource("./langs");
         assert url != null;
         String path = url.getPath();
         File[] files = new File(path).listFiles();
@@ -48,8 +48,10 @@ public class Message {
     public static String get(String lang, String key) {
         Map<String, Object> language = getLanguage(pluginLangs, lang);
         Object obj;
-        if(language == null) obj = "404";
-        else obj = language.getOrDefault(key, "404");
+        if (language == null)
+            obj = "404";
+        else
+            obj = language.getOrDefault(key, "404");
 
         if (obj.equals("404")) {
             language = getLanguage(apiLangs, lang);
@@ -63,7 +65,7 @@ public class Message {
 
     @Deprecated
     public static String get(String key) {
-        return get("en_US",key);
+        return get("en_US", key);
     }
 
     private static Map<String, Object> getLanguage(HashMap<String, Map<String, Object>> locales, String lang) {
